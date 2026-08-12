@@ -1,19 +1,18 @@
 # LabLens
 
-**Live demo:** _add your Streamlit Cloud URL here after deploying_
+**Live demo:** _lablens.streamlit.app_
 
-LabLens is a web app that turns lab report values — CBC, Lipid Profile, Liver Function, Kidney
-Function, Thyroid Panel, or Blood Sugar — into a plain-language, pattern-based health summary.
+LabLens is a web app that turns lab report values like CBC, Lipid Profile, Liver Function, Kidney
+Function, Thyroid Panel, or Blood Sugar into a plain language, pattern-based health summary.
 Upload a PDF, scan a report QR code, or type values in by hand.
 
-Try it instantly with the **"Load sample data"** button on the landing screen — no upload needed.
+Try it instantly with the **"Load sample data"** button on the landing screen, no upload needed.
 
 ---
 
-## What it actually does
+## How it works
 
-The interesting engineering problem here isn't the UI — it's turning arbitrary, human-designed lab
-report documents into a normalized schema:
+It extracts laboratory values from differently formatted report documents, normalizes them into a consistent structure, and applies transparent rule-based checks to identify notable patterns and explain them in plain language.
 
 ```
 PDF (multiple laboratory layouts)
@@ -41,19 +40,16 @@ plain-language clinical summary
 ```
 
 Every value that gets extracted is shown back to the user in an explicit extraction report
-(found vs. missing, per parameter) before analysis runs — the pipeline is designed to be
+(found vs. missing, per parameter) before analysis runs-the pipeline is designed to be
 semi-automated and reviewable, not a black box.
 
-**The interpretation engine is fully rule-based** — deterministic `if/then` pattern matching
-against reference ranges, not a trained model or LLM. That's a deliberate choice: every output is
-traceable to an explicit rule, nothing is inferred by a model that can't explain itself.
+**The interpretation engine uses a rule-based approach** — laboratory values are evaluated against configured reference ranges and predefined clinical patterns to generate corresponding observations and explanations. The rules are kept separate from the extraction pipeline, making the system easier to inspect and modify.
 
 ## Features
 
 - **6 report types** — CBC, Lipid Profile, LFT, KFT, Thyroid Panel, Blood Sugar/Diabetes Profile
 - **3 ways to get values in** — manual entry, PDF upload (auto-detects report type), or QR code
-  (camera or uploaded image, with a multi-pass image-preprocessing pipeline for real-world photo
-  conditions — blur, rotation, low contrast)
+  (camera or uploaded image)
 - **Trend tracking** — line charts across visits, per report type and parameter
 - **Insights** — trajectory classification, visit-over-visit comparison, next-step suggestions,
   all derived from the same rule engine that powers the per-report results
@@ -69,14 +65,11 @@ rules.py    ~48 declarative clinical pattern rules across 6 panels
 config.py   parameters, reference ranges, report-type registry
 ```
 
-Data is **session-only** (`st.session_state`) — nothing is written to disk. This is deliberate:
-it means every visitor's data is private to their own browser session and nothing persists
-between deployments or visitors.
+Data is stored in `st.session_state` and remains limited to the current browser session. No report data is written to disk or persisted across sessions.
 
 ## Tech stack
 
-Python, Streamlit, PyMuPDF/pdfplumber/PyPDF2/Tesseract (PDF+OCR extraction), OpenCV/pyzbar
-(QR decoding), pandas.
+Python, Streamlit, PyMuPDF/pdfplumber/PyPDF2/Tesseract (PDF+OCR extraction), OpenCV (image processing), pandas.
 
 ## Running locally
 
