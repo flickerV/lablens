@@ -1,6 +1,6 @@
 # LabLens
 
-**Live demo:** _lablens.streamlit.app_
+**Live demo:** _https://lablens.streamlit.app/_
 
 LabLens is a web app that turns lab report values like CBC, Lipid Profile, Liver Function, Kidney
 Function, Thyroid Panel, or Blood Sugar into a plain language, pattern-based health summary.
