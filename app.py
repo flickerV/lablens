@@ -407,11 +407,9 @@ section[data-testid="stSidebar"] .stButton > button:hover {
 
 /* ── Identity screen ── */
 .identity-wrap {
-  min-height: calc(100vh - 1.2rem);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: .5rem 1rem 1.2rem;
+  min-height: auto;
+  display: block;
+  padding: .25rem 1rem .8rem;
 }
 .identity-card {
   background: linear-gradient(180deg, #ffffff 0%, #fbf7f2 100%);
@@ -421,6 +419,7 @@ section[data-testid="stSidebar"] .stButton > button:hover {
   padding: 1.8rem 1.8rem 1.55rem;
   max-width: 920px;
   width: 100%;
+  margin: 0 auto .75rem;
 }
 .identity-eyebrow {
   display: inline-block;
@@ -1231,7 +1230,7 @@ def load_sample_data() -> None:
     st.session_state.report_type = "cbc"
 
     samples = [
-        (30, "cbc", {
+        (1, "cbc", {
             "age": 29, "sex": "female", "hemoglobin": 10.6, "rbc": 4.1, "hematocrit": 34,
             "mcv": 72, "mch": 24, "mchc": 31, "wbc": 7200, "neutrophils": 56, "lymphocytes": 33,
             "monocytes": 6, "eosinophils": 4, "basophils": 1, "platelets": 295000,
@@ -1240,11 +1239,6 @@ def load_sample_data() -> None:
             "age": 29, "sex": "female", "hemoglobin": 11.8, "rbc": 4.3, "hematocrit": 37,
             "mcv": 78, "mch": 26, "mchc": 32, "wbc": 7000, "neutrophils": 55, "lymphocytes": 34,
             "monocytes": 6, "eosinophils": 4, "basophils": 1, "platelets": 300000,
-        }),
-        (1, "cbc", {
-            "age": 29, "sex": "female", "hemoglobin": 12.6, "rbc": 4.5, "hematocrit": 39,
-            "mcv": 82, "mch": 27, "mchc": 33, "wbc": 6900, "neutrophils": 54, "lymphocytes": 35,
-            "monocytes": 6, "eosinophils": 4, "basophils": 1, "platelets": 305000,
         }),
         (7, "lipid", {
             "age": 29, "sex": "female", "total_cholesterol": 238, "ldl": 152, "hdl": 42,
@@ -1681,7 +1675,7 @@ def render_identity_screen() -> None:
                     st.rerun()
 
         st.markdown("<div style='height:.3rem'></div>", unsafe_allow_html=True)
-        if st.button("Or, load sample data to explore →", use_container_width=True):
+        if st.button("Or load sample data to explore →", type="primary", use_container_width=True):
             load_sample_data()
             st.session_state.current_page = "dashboard"
             st.rerun()

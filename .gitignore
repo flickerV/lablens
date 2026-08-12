@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.Python
+*.egg-info/
+
+# Environments
+.env
+.venv/
+venv/
+
+# Editor/OS cruft
+.DS_Store
+.vscode/
+.idea/
+
+# LabLens no longer writes any data to disk (history/vault live in
+# st.session_state, per-visitor, and are never persisted) — but these are
+# ignored anyway as a safety net in case of local testing leftovers.
+data.json
+vault.json
+*.session_data.json
