@@ -1,0 +1,17 @@
+streamlit>=1.32
+pandas>=2.0
+pillow>=10.0
+
+# QR decoding (pyzbar needs the system libzbar0 library — see packages.txt)
+pyzbar>=0.1.9
+opencv-python-headless>=4.9
+numpy>=1.26
+
+# PDF text extraction (tried in order, with graceful fallback)
+pymupdf>=1.23
+pdfplumber>=0.10
+PyPDF2>=3.0
+
+# OCR fallback for scanned/image-only PDFs (needs system tesseract-ocr — see packages.txt)
+pytesseract>=0.3.10
+pdf2image>=1.17
