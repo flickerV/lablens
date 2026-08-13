@@ -30,7 +30,7 @@ alias-based value extraction (regex + line-parsing, per-parameter alias lists �
 e.g. "hemoglobin"/"haemoglobin"/"hb"/"hgb" all resolve to the same field)
    │
    ▼
-unit normalization + reference-range classification (sex-aware)
+unit normalization + reference-range classification (gender-aware)
    │
    ▼
 rule-based pattern matching (~48 hand-written clinical patterns across 6 panels)
@@ -66,6 +66,22 @@ config.py   parameters, reference ranges, report-type registry
 ```
 
 Data is stored in `st.session_state` and remains limited to the current browser session. No report data is written to disk or persisted across sessions.
+
+## Project Structure
+
+```text
+lablens/
+├── app.py                 # Main Streamlit application and UI
+├── engine.py              # PDF/OCR extraction, parsing, normalization, analysis
+├── rules.py               # Declarative rule definitions for pattern detection
+├── config.py              # Parameters, reference ranges, and report configuration
+├── requirements.txt       # Python dependencies
+├── packages.txt           # System-level dependencies
+├── README.md              # Project documentation
+├── .gitignore             # Git exclusions
+└── .streamlit/
+    └── config.toml        # Streamlit configuration
+```
 
 ## Tech stack
 
